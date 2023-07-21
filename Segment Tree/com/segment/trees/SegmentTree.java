@@ -7,8 +7,7 @@ public class SegmentTree {
 	
 	public SegmentTree(int n, int[] nums) {
 		this.numsLen = n;
-		int power = (int) Math.ceil(Math.log(n)/Math.log(2));
-		int size = 2 * (int)Math.pow(2, power) - 1; 
+		int size = 4 * n; 
 		tree = new int[size];
 		constructSegmentTree(nums, 0, n-1, 0);
 		print();
@@ -26,9 +25,7 @@ public class SegmentTree {
 	}
 	
 	public int fetchValue(int queryStart, int queryEnd) {
-		if(queryEnd < queryStart) return 0;
-		if(queryEnd < 0) return 0;
-		if(queryStart >= this.numsLen) return 0;
+		if(queryEnd < queryStart || queryEnd < 0 || queryStart >= this.numsLen) return 0;
 		return fetchValue(queryStart, queryEnd, 0, numsLen-1, 0);
 	}
 	
